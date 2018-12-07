@@ -1,4 +1,5 @@
 import os
+import time
 from AVLTree import AVLTree,Node
 from RedBlackTree import RedBlackTree,RBTNode
 ###Searches for each anagrams in the list and returns a counter for each valid anagram
@@ -17,13 +18,13 @@ def most_anagrams(english_words):
     f = open(name_file)
     line = f.readline()
     words = []
-
+    print("list of random words")
     while line:  # reads line by line to not run out of memory; gets only the passwords
 
         try:  # ignores line if irregularity with data
 
             words.append(line.rstrip())
-            # print(line.rstrip())
+            print(line.rstrip())
         except:
             print()
         line = f.readline()
@@ -37,7 +38,7 @@ def most_anagrams(english_words):
     for i in range(len(num_anagrams)):
         if max_count < num_anagrams[i]:
             max_count = num_anagrams[i]
-            max = words[i]
+            max_word = words[i]
     return max_word
 # returns an array of all the possible permutations of a word/string
 def all_perms(elements):
@@ -57,8 +58,8 @@ def RedBlackSolution(name_file):
     english_words = RedBlackTree()
     while line:  # reads line by line to not run out of memory; gets only the passwords
         try:  # ignores line if irregularity with data
-            english_words.insert(Node(line.rstrip()))
-            print(line.rstrip())
+            english_words.insert(line.rstrip())
+            # print(line.rstrip())
         except:
             print()
         line = f.readline()
@@ -76,7 +77,7 @@ def AVLTreeSolution(name_file):
         try:  # ignores line if irregularity with data
 
             english_words.insert(Node(line.rstrip()))
-            print(line.rstrip())
+            # print(line.rstrip())
         except:
             print()
         line = f.readline()
@@ -85,7 +86,7 @@ def AVLTreeSolution(name_file):
     return english_words
 def main():
 
-    name_file = 'shorter_list.txt'
+    name_file = 'words.txt'
     tree_decider = 2
 
     while tree_decider != 1 and tree_decider != 0:
@@ -94,11 +95,14 @@ def main():
     word_test = input(" Enter the word you would like to test for english language anagrams")
     if tree_decider == 0:
         english_words = AVLTreeSolution(name_file)
+        print("Using AVLTree")
     else:
         english_words = RedBlackSolution(name_file)
+        print("Using RedBlackTree")
     anagrams = all_perms(word_test)
     print(count_anagrams(anagrams,english_words))
-    print(most_anagrams(english_words))
+    print("most anagrams = ",most_anagrams(english_words))
 
-
+start_time = time.clock()
 main()
+print(time.clock() - start_time, "seconds")

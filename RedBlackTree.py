@@ -327,12 +327,12 @@ class RedBlackTree:
         current_node = self.root
         while current_node is not None:
             # Return the node if the key matches.
-            if current_node.key.key == key:
+            if current_node.key == key:
                 return True
 
             # Navigate to the left if the search key is
             # less than the node's key.
-            elif key < current_node.key.key:
+            elif key < current_node.key:
                 current_node = current_node.left
 
             # Navigate to the right if the search key is
